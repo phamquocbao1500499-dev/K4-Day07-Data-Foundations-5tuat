@@ -7,7 +7,7 @@
 
 **Tổng điểm phần cá nhân: 60** = Khởi động (5) + Hướng tiếp cận (10) + Hoàn thiện code (30) + Dự đoán độ tương tự (5) + Kết quả truy xuất (10).
 
-Package bài làm: `src.PhamCongDat_2A202601406`. Kịch bản benchmark có thể chạy lại tại `scripts/benchmark_phamcongdat.py`.
+Package bài làm: `src.PhamCongDat_2A202601406`. Kịch bản benchmark có thể chạy lại tại `scripts/benchmark.py`.
 
 ---
 
@@ -146,7 +146,7 @@ Cặp 1 có cùng ý định nhưng chỉ đạt 0,529098, thấp hơn hai cặp
 - Chunker: `HeadingAwareChunker(chunk_size=900)`.
 - Embedder: `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`.
 - Agent: `KnowledgeBaseAgent` tổng hợp ngữ cảnh truy xuất top-3.
-- Lệnh chạy: `python -m scripts.benchmark_phamcongdat`.
+- Lệnh chạy: `python -m scripts.benchmark`.
 
 | # | Câu hỏi | Top-1 chunk và bằng chứng | Score | Liên quan? | Câu trả lời của Agent |
 |---|---|---|---:|---|---|
