@@ -1,3 +1,4 @@
 doc_id,file_path,title,source_url,retrieved_at,document_version,license_or_permission
 k4-returns-policy,data/k4_ecommerce/returns-policy.md,Chính sách đổi trả,https://example.com/chinh-sach/doi-tra,2026-08-02,2026.1,example-template-replace-me
 k4-seller-listing,data/k4_ecommerce/seller-listing.md,Quy định đăng bán,https://example.com/nguoi-ban/dang-ban,2026-08-02,2026.1,example-template-replace-me
+quy-dinh-dang-ban-alibaba,data/k4_ecommerce/quy-dinh-dang-ban-alibaba.md,Quy định đăng bán sản phẩm (Alibaba ICBU),https://rulechannel.alibaba.com/icbu?type=detail&ruleId=11000725&cId=1284#/rule/detail?ruleId=11000725&cId=1284,2026-08-03,not-stated,public-page
