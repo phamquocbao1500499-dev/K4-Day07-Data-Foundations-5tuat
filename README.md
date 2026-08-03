@@ -249,3 +249,4 @@ pytest tests/ -v
 
 ## Thành Viên
 2A202601502_Phạm Quốc Bảo
+2A202601646_Trần Hoàng Long
