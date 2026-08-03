@@ -141,6 +141,80 @@ class RecursiveChunker:
         return chunks
 
 
+class HeadingAwareChunker:
+    """Split Markdown policies by heading, then split oversized sections.
+
+    Repeating the section heading on every oversized sub-chunk preserves the
+    policy topic when a chunk is retrieved without its surrounding document.
+    """
+
+    HEADING_PATTERN = re.compile(
+        r"^(?:"
+        r"#{1,6}\s+\S|"
+        r"[IVXLCDM]+\.\s+\S|"
+        r"\d+(?:\.\d+)*\.\s+[A-ZÀ-Ỹ0-9][A-ZÀ-Ỹ0-9\s/&()_-]{4,}$|"
+        r"Cách\s+\d+\s*:"
+        r")"
+    )
+
+    def __init__(self, chunk_size: int = 900) -> None:
+        if chunk_size <= 0:
+            raise ValueError("chunk_size must be greater than zero")
+        self.chunk_size = chunk_size
+
+    def chunk(self, text: str) -> list[str]:
+        if not text or not text.strip():
+            return []
+
+        sections: list[str] = []
+        current_lines: list[str] = []
+        for line in text.splitlines():
+            if self.HEADING_PATTERN.match(line.strip()) and current_lines:
+                section = "\n".join(current_lines).strip()
+                if section:
+                    sections.append(section)
+                current_lines = [line]
+            else:
+                current_lines.append(line)
+        final_section = "\n".join(current_lines).strip()
+        if final_section:
+            sections.append(final_section)
+
+        chunks: list[str] = []
+        for section in sections:
+            if len(section) <= self.chunk_size:
+                chunks.append(section)
+                continue
+
+            first_line, separator, body = section.partition("\n")
+            has_heading = bool(separator and self.HEADING_PATTERN.match(first_line.strip()))
+            heading = first_line.strip() if has_heading else ""
+            content = body.strip() if has_heading else section
+            available_size = max(1, self.chunk_size - len(heading) - 2)
+            repeated_lead = ""
+            lead, paragraph_break, remainder = content.partition("\n\n")
+            if (
+                paragraph_break
+                and remainder
+                and len(lead) < available_size // 4
+                and available_size > len(lead) + 2
+                and not re.match(r"^\d+(?:\.\d+)+\.", lead.strip())
+            ):
+                # A short section introduction is useful context, not a useful
+                # standalone retrieval result. Repeat it on each sub-chunk.
+                repeated_lead = lead.strip()
+                content = remainder.strip()
+                available_size -= len(repeated_lead) + 2
+            subchunks = RecursiveChunker(chunk_size=available_size).chunk(content)
+            for subchunk in subchunks:
+                body_parts = [part for part in (repeated_lead, subchunk.strip()) if part]
+                chunk_body = "\n\n".join(body_parts)
+                combined = f"{heading}\n\n{chunk_body}" if heading else chunk_body
+                if combined:
+                    chunks.append(combined)
+        return chunks
+
+
 def _dot(a: list[float], b: list[float]) -> float:
     return sum(x * y for x, y in zip(a, b))
 
