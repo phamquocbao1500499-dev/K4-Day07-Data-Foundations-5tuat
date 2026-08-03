@@ -1,3 +1,13 @@
 doc_id,file_path,title,source_url,retrieved_at,document_version,license_or_permission
 k4-returns-policy,data/k4_ecommerce/returns-policy.md,Chính sách đổi trả,https://example.com/chinh-sach/doi-tra,2026-08-02,2026.1,example-template-replace-me
 k4-seller-listing,data/k4_ecommerce/seller-listing.md,Quy định đăng bán,https://example.com/nguoi-ban/dang-ban,2026-08-02,2026.1,example-template-replace-me
+cam-han-che-shopee,data/k4_ecommerce/cam_han_che_shopee.md,Danh sách Hàng hóa Bị cấm hoặc Hạn chế Đăng bán trên Shopee,https://help.shopee.vn/portal/article/79024,2026-08-03,2026-03-01,public-page
+quy-che-hoat-dong-shopee,data/k4_ecommerce/quy_che_hoat_dong_shopee.md,Quy Chế Hoạt Động Sàn Thương Mại Điện Tử Shopee,https://shopee.vn/docs/quy-che-hoat-dong,2026-08-03,2026-03-04,public-page
+tra-hang-hoan-tien-shopee,data/k4_ecommerce/tra_hang_hoan_tien_shopee.md,Chính Sách Trả Hàng Và Hoàn Tiền Shopee,https://help.shopee.vn/portal/article/79017,2026-08-03,2026-03-04,public-page
+chinh-sach-nguoi-ban-amazon,data/k4_ecommerce/chinh-sach-nguoi-ban-amazon.md,Tổng quan chính sách dành cho người bán trên Amazon,https://sell.amazon.com/es/blog/selling-policies?mons_sel_locale=es_US,2026-08-03,2024-10-16,public-page
+tinh-trang-san-pham-amazon,data/k4_ecommerce/tinh-trang-san-pham-amazon.md,Hướng dẫn khai báo tình trạng sản phẩm trên Amazon,https://sell.amazon.com/blog/amazon-condition-guidelines?mons_sel_locale=en_US,2026-08-03,2025-09-26,public-page
+dang-ky-nguoi-ban-amazon,data/k4_ecommerce/dang-ky-nguoi-ban-amazon.md,Hướng dẫn đăng ký tài khoản người bán Amazon,https://sell.amazon.com/sell/registration-guide?mons_sel_locale=en_US,2026-08-03,not-stated,public-page
+k4_seller_tiktok_shop_terms,data/k4_ecommerce/k4-seller-tiktok-shop-terms.md,Điều khoản dịch vụ dành cho người bán trên TikTok Shop,https://seller-vn.tiktok.com/university/essay?knowledge_id=2581017870255874,2026-08-03,2026.2 (cập nhật 09/02/2026),public-page
+k4_etsy_buyer_policy,data/k4_ecommerce/k4_etsy_buyer_policy.md,Buyer Policy - Our House Rules,https://www.etsy.com/legal/buyers/,2026-08-03,effective July 9 2026 (last updated Jun 9 2026),public-page
+k4_etsy_seller_policy,data/k4_ecommerce/k4_etsy_seller_policy.md,Seller Policy - Our House Rules,https://www.etsy.com/legal/sellers/,2026-08-03,effective July 9 2026 (last updated Jun 9 2026),public-page
+k4_seller_tiki_quyen_nghia_vu,data/k4_ecommerce/k4_seller_tiki_quyen_nghia_vu.md,Quyền và nghĩa vụ của Nhà Bán và Tiki,https://hocvien.tiki.vn/faq/quyen-va-nghia-vu-cua-nha-ban-va-tiki/,2026-08-03,n/a (không ghi ngày cập nhật trên trang gốc),public-page
