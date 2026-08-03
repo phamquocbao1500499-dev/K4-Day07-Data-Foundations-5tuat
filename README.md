@@ -251,3 +251,5 @@ pytest tests/ -v
 2A202601502_Phạm Quốc Bảo
 2A202601646_Trần Hoàng Long
 2A202601040_Nguyễn Sỹ Mạnh Cường
+2A202601502_Trần Đức Bảo
+2A202601406_Phạm Công Đạt

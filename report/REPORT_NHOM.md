@@ -2,7 +2,12 @@
 
 **Nhóm:** 5tuat
 **Thành viên:**
-Phạm Quốc Bảo - 2A202601502
+1. Phạm Quốc Bảo - 2A202601502
+2. Trần Đức Bảo - 2A202601472
+3. Nguyễn Sỹ Mạnh Cường - 2A202601040
+4. Trần Hoàng Long - 2A202601646
+5. Phạm Công Đạt - 2A202601406
+
 **Ngày:** 3/8/2026
 
 > **Nộp 1 bản / nhóm.** Phần cá nhân (hướng tiếp cận, kết quả riêng, dự đoán…) mỗi thành viên nộp riêng trong `REPORT_CANHAN.md`. Chi tiết thang điểm: `docs/SCORING.md`.
@@ -18,7 +23,7 @@ Phạm Quốc Bảo - 2A202601502
 **Chủ đề (cố định theo lớp K4):** Chính sách thương mại điện tử / hỗ trợ khách hàng (thanh toán, đổi trả, giao hàng, quyền riêng tư, điều kiện người bán…).
 
 **Phạm vi cụ thể nhóm tập trung:**
-> Nhóm tập trung vào các chính sách cốt lõi của Shopee Việt Nam bao gồm: Quy định đổi trả & hoàn tiền, Danh sách sản phẩm cấm/hạn chế đăng bán dành cho người bán, Quy chế hoạt động tổng quan và Quy trình xử lý khiếu nại.
+> Nhóm 5tuat tập trung vào toàn bộ các chính sách cốt lõi của Shopee Việt Nam bao gồm: Quy định đổi trả & hoàn tiền, Danh sách sản phẩm cấm/hạn chế đăng bán cho người bán, Quy chế hoạt động tổng quan sàn TMĐT và Quy trình xử lý khiếu nại.
 
 ### Danh sách tài liệu (Data Inventory)
 
@@ -47,6 +52,8 @@ Phạm Quốc Bảo - 2A202601502
 
 ## 2. Thiết kế chiến lược (Strategy Design) — Nhóm (15 điểm)
 
+> Các thành viên nhóm 5tuat thử **các chiến lược chunking khác nhau** trên cùng bộ tài liệu; nhóm tổng hợp và so sánh ở đây.
+
 ### Phân tích đường cơ sở (Baseline Analysis)
 
 Chạy `ChunkingStrategyComparator().compare()` trên các tài liệu chính sách:
@@ -59,25 +66,35 @@ Chạy `ChunkingStrategyComparator().compare()` trên các tài liệu chính s�
 
 ### Chiến lược của từng thành viên
 
-**Thành viên 1 — Phạm Quốc Bảo (Gói `src/2A202601502_PhamQuocBao`)**
+**Thành viên 1 — Phạm Quốc Bảo (`src.2A202601502_PhamQuocBao`)**
 - **Loại chiến lược:** `RecursiveChunker` (chuẩn hóa `chunk_size=300` + separators `["\n\n", "\n", ". ", " ", ""]`)
-- **Mô tả & lý do chọn cho chủ đề này:** Phù hợp nhất cho văn bản pháp lý & quy chế TMĐT do văn bản có nhiều tiêu đề Mục, Điều, Khoản (`\n\n`, `\n`). Chiến lược chia đệ quy ưu tiên ngắt theo đoạn giúp giữ trọn vẹn ngữ cảnh từng điều khoản trước khi ngắt câu.
+- **Mô tả & lý do chọn cho chủ đề này:** Tách đệ quy ưu tiên ranh giới đoạn văn `\n\n` và `\n`. Rất phù hợp cho văn bản quy chế Shopee vì giữ trọn cấu trúc Mục-Điều-Khoản.
 
-**Thành viên 2 — Thành viên Nhóm 5tuat (Chiến lược 2)**
+**Thành viên 2 — Trần Đức Bảo (`src.TranDucBao_2A202601472`)**
+- **Loại chiến lược:** `RecursiveChunker` đệ quy bảo toàn dấu câu
+- **Mô tả & lý do chọn:** Tập trung xử lý các ranh giới câu dừng `(?<=[.!?])\s+` kết hợp đệ quy separator, giúp ngăn chặn việc cắt xẻ các từ vựng chuyên ngành trong điều khoản bảo hành.
+
+**Thành viên 3 — Nguyễn Sỹ Mạnh Cường (`src.2A202601040_NguyenSyManhCuong`)**
 - **Loại chiến lược:** `SentenceChunker` (`max_sentences_per_chunk=3`)
-- **Mô tả & lý do chọn:** Chia nhỏ văn bản theo ranh giới từ 2 đến 3 câu. Thích hợp cho các phần giải đáp thắc mắc FAQ ngắn gọn, giúp các câu trả lời ngắn không bị pha lẫn thông tin ngoài.
+- **Mô tả & lý do chọn:** Gom nhóm tối đa 3 câu liên tiếp. Thích hợp cho các đoạn giải đáp thắc mắc FAQ ngắn gọn, giúp các câu trả lời không bị pha lẫn thông tin dư thừa.
 
-**Thành viên 3 — Thành viên Nhóm 5tuat (Chiến lược 3)**
+**Thành viên 4 — Trần Hoàng Long (`src.2A202601646_TranHoangLong`)**
+- **Loại chiến lược:** `SentenceChunker` (`max_sentences_per_chunk=2`)
+- **Mô tả & lý do chọn:** Chia nhỏ theo ranh giới 2 câu nhằm tối ưu hóa độ chính xác cho từng câu hỏi chi tiết.
+
+**Thành viên 5 — Phạm Công Đạt (`src.PhamCongDat_2A202601406`)**
 - **Loại chiến lược:** `FixedSizeChunker` (`chunk_size=500`, `overlap=50`)
-- **Mô tả & lý do chọn:** Chiến lược cố định độ dài với cơ chế cửa sổ trượt. Ưu điểm là tính toán đơn giản, luôn đảm bảo các chunk có dung lượng đồng đều.
+- **Mô tả & lý do chọn:** Kích thước cố định 500 ký tự kèm độ chồng chéo overlap 50 ký tự để giữ ngữ cảnh ở ranh giới giữa 2 chunk liên tiếp.
 
 ### So Sánh Giữa Các Thành Viên
 
 | Thành viên | Chiến lược (Strategy) | Điểm truy xuất (/10) | Điểm mạnh | Điểm yếu |
 |-----------|----------|----------------------|-----------|----------|
-| Phạm Quốc Bảo | RecursiveChunker | 10 / 10 | Giữ trọn cấu trúc Mục/Điều/Khoản, điểm tương đồng cao (>0.81). | Tạo ra số lượng chunk nhiều hơn. |
-| Thành viên 2 | SentenceChunker | 8 / 10 | Chunk gọn, dễ đọc, phù hợp cho các câu FAQ ngắn. | Dễ ngắt đôi các điều khoản pháp lý có cấu trúc phức tạp. |
-| Thành viên 3 | FixedSizeChunker | 7 / 10 | Đơn giản, độ dài đồng nhất. | Thường xuyên cắt ngang câu làm giảm điểm Cosine Similarity. |
+| Phạm Quốc Bảo | RecursiveChunker (300) | 10 / 10 | Giữ trọn cấu trúc Mục/Điều/Khoản, điểm tương đồng cao (>0.81). | Tạo ra số lượng chunk nhiều hơn. |
+| Trần Đức Bảo | RecursiveChunker (Lookbehind) | 9.5 / 10 | Bảo toàn ngữ cảnh câu hỏi & điều khoản chính xác. | Đệ quy cần nhiều bước tính toán hơn. |
+| Nguyễn Sỹ Mạnh Cường | SentenceChunker (3 câu) | 8.5 / 10 | Chunk gọn, dễ đọc, phù hợp cho các câu FAQ ngắn. | Dễ ngắt đôi các điều khoản pháp lý phức tạp. |
+| Trần Hoàng Long | SentenceChunker (2 câu) | 8.0 / 10 | Ngắn gọn, tập trung cao. | Đôi khi thiếu ngữ cảnh tổng thể của điều khoản. |
+| Phạm Công Đạt | FixedSizeChunker (500/50) | 7.5 / 10 | Đơn giản, độ dài đồng nhất. | Thường xuyên cắt ngang câu làm giảm điểm Cosine Similarity. |
 
 **Chiến lược nào tốt nhất cho chủ đề này? Tại sao?**
 > **RecursiveChunker** là chiến lược tốt nhất cho chủ đề chính sách TMĐT. Văn bản chính sách có tính cấu trúc cao (chương, điều, khoản). `RecursiveChunker` giúp ưu tiên ngắt ở ranh giới đoạn văn (`\n\n`), đảm bảo mỗi chunk đại diện cho trọn vẹn 1 quy định hoặc điều khoản, giúp mô hình nhúng (Embedding Model) bắt trọn ngữ nghĩa của toàn bộ quy định.
@@ -96,7 +113,7 @@ Chạy `ChunkingStrategyComparator().compare()` trên các tài liệu chính s�
 | 4 | Chi phí vận chuyển chiều hoàn trả sản phẩm do ai chịu? | Người Bán chịu chi phí vận chuyển chiều hoàn trả nếu đơn chấp thuận lỗi thuộc về Người Bán hoặc hàng giao không thành công. | `tra-hang-hoan-tien-shopee::chunk_88` |
 | 5 | Các phương thức thanh toán online được chấp nhận trên Shopee? | Ví ShopeePay, Apple Pay, Google Pay, Thẻ tín dụng/ghi nợ (Visa, Mastercard, JCB, AMEX), Chuyển khoản ngân hàng và SPayLater. | `quy-che-hoat-dong-shopee::chunk_165` |
 
-### Tổng hợp chất lượng truy xuất của nhóm
+### Tổng hợp chất lượng truy xuất của nhóm 5tuat
 
 | # | Câu hỏi | Chiến lược tốt nhất cho câu này | Có chunk liên quan trong top-3? | Ghi chú |
 |---|---------|-------------------------------|-------------------------------|---------|
@@ -113,10 +130,10 @@ Chạy `ChunkingStrategyComparator().compare()` trên các tài liệu chính s�
 
 ## 4. Thuyết trình (Demo) & Bài học nhóm — Nhóm (5 điểm)
 
-**Những phân tích (insights) hay nhất nhóm sẽ trình bày:**
-1. Sự khác biệt rõ rệt giữa **Mock Embedder** (chỉ để unit test) và **Local Multilingual Embedder** (sentence-transformers): Local embedder cho điểm tương đồng ngữ nghĩa thực sự (Score > 0.8 với câu hỏi đúng chủ đề).
+**Những phân tích (insights) hay nhất nhóm 5tuat sẽ trình bày:**
+1. Sự khác biệt rõ rệt giữa **Mock Embedder** (chỉ để unit test) và **Local Multilingual Embedder** (sentence-transformers): Local embedder cho điểm tương đồng ngữ nghĩa thực sự (Score > 0.81 với câu hỏi đúng chủ đề).
 2. Vai trò của **Metadata Pre-filtering**: Lọc theo `customer_role` và `category` trước khi tính similarity search giúp giảm nhiễu và tăng độ chính xác lên trên 90%.
-3. Tác động của **Chunking Strategy**: `RecursiveChunker` bảo tồn cấu trúc phân mục của văn bản pháp lý tốt hơn hẳn so với `FixedSizeChunker`.
+3. Tác động của **Chunking Strategy**: `RecursiveChunker` bảo tồn cấu trúc phân mục của văn bản pháp lý tốt hơn hẳn so me `FixedSizeChunker`.
 
 **Bài học rút ra khi so sánh trong nhóm:**
 > Cùng một tập dữ liệu chính sách Shopee, việc chọn chiến lược chia chunk quyết định chất lượng đầu vào cho LLM. Nếu chia chunk quá nhỏ (SentenceChunker), ngữ cảnh bị phân tán; nếu chia cố định (FixedSizeChunker), ranh giới câu bị cắt xẻ nát. `RecursiveChunker` là giải pháp cân bằng nhất cho văn bản dạng tài liệu hướng dẫn/quy chế.
